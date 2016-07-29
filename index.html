@@ -17,16 +17,17 @@
 
 </head>
 
-
-
-
 <body>
 
 <div id="table1_landing"></div>
 <div id="table2_landing"></div>
 <div id="table3_landing"></div>
-</body>
+<div id="table4_landing"></div>
+<div id="table5_landing"></div>
+<div id="table6_landing"></div>
+<div id="table7_landing"></div>
 
+</body>
 
 <script src="d3.v3.min.js"></script>
 <script src="d3-superTable.js"></script>
@@ -61,6 +62,30 @@ d3.select("#table3_landing").call(
 		.table_header(["chrom","start","end","name","score","type"])
 		.num_rows_to_show(5)
 		.click_function(choose_row)
+);
+
+
+// Prevent selecting a new row until the first row is done running:
+
+var finished_running = true;
+
+function ready() {
+	return finished_running;
+}
+
+function run_something(d) {
+	console.log("running " + d.name);
+	finished_running = false;
+	window.setTimeout(function() {finished_running = true},3000);
+}
+
+d3.select("#table4_landing").call(
+	d3.superTable()
+		.table_data(data)
+		.table_header(["chrom","start","end","name","score","type"])
+		.num_rows_to_show(5)
+		.click_function(run_something)
+		.check_ready_function(ready)
 );
 
 

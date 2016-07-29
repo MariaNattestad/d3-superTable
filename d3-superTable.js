@@ -32,9 +32,11 @@ d3.superTable = function() {
 
             if (typeof(click_function) === "function") {
             	rows.on("click", function (d) {
-                    d3.selectAll("tr").attr("class","unselected");
-                    d3.select(this).attr("class", "selected");
-                    click_function(d);
+                    if (typeof(check_ready_function) != "function" || check_ready_function() == true) {
+                        d3.selectAll("tr").attr("class","unselected");
+                        d3.select(this).attr("class", "selected");
+                        click_function(d);    
+                    }
                 }).style("cursor","pointer");
             }
             rows.selectAll("td").data(table_header).enter().append("td").html(function(d) { return d3.select(this.parentNode).datum()[d]});
@@ -59,6 +61,11 @@ d3.superTable = function() {
     my.click_function = function(value) {
         if (!arguments.length) return click_function;
         click_function = value;
+        return my;
+    };
+    my.check_ready_function = function(value) {
+        if (!arguments.length) return check_ready_function;
+        check_ready_function = value;
         return my;
     };
 
