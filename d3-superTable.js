@@ -11,17 +11,11 @@ d3.superTable = function() {
         selection.each(function(d, i) {
             var element = d3.select(this);
             
-            // console.log("inside selection");
-            // console.log(table_data.length);
-
             if (table_header == undefined) {
             	table_header = d3.keys(table_data[0]);
             }
-            // console.log("header:");
-            // console.log(table_header);
 
             element.html("");
-            // element.append("button").on("click",selection_function_var).html(labelvar);
             var table = element.append("table").attr("class","d3-superTable-table");
             
             table.append("tr").attr("class","d3-superTable-header-row").selectAll("th").data(table_header).enter().append("th").html(function(d) {return d});
@@ -34,10 +28,14 @@ d3.superTable = function() {
             	}
             }
 
-            var rows = table.selectAll("tr.d3-superTable-row").data(table_data_subset).enter().append("tr")
-            	.attr("class","d3-superTable-row");
+            var rows = table.selectAll("tr.unselected").data(table_data_subset).enter().append("tr").attr("class","unselected");
+
             if (typeof(click_function) === "function") {
-            	rows.on("click",click_function);
+            	rows.on("click", function (d) {
+                    d3.selectAll("tr").attr("class","unselected");
+                    d3.select(this).attr("class", "selected");
+                    click_function(d);
+                }).style("cursor","pointer");
             }
             rows.selectAll("td").data(table_header).enter().append("td").html(function(d) { return d3.select(this.parentNode).datum()[d]});
         });
@@ -63,7 +61,6 @@ d3.superTable = function() {
         click_function = value;
         return my;
     };
-
 
     return my;
 }
