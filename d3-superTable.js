@@ -55,12 +55,22 @@ d3.superTable = function() {
 							if (requirements[column][r].op == "=" && col != arg) {
 								good = false;
 								break;
-							} else if (requirements[column][r].op == ">" && col < arg) {
-								good = false;
-								break;
-							} else if (requirements[column][r].op == "<" && col > arg) {
-								good = false;
-								break;
+							} else if (requirements[column][r].op == ">") {
+								if (typeof(table_data[i][column]) === "number" && col <= arg) {
+									good = false;
+									break;
+								} else if (typeof(table_data[i][column]) === "string" && natural_sort(col,arg) <= 0) {
+									good = false;
+									break;
+								}
+							} else if (requirements[column][r].op == "<") {
+								if (typeof(table_data[i][column]) === "number" && col >= arg) {
+									good = false;
+									break;
+								} else if (typeof(table_data[i][column]) === "string" && natural_sort(col,arg) >= 0) {
+									good = false;
+									break;
+								}
 							}
 						}
 					}
