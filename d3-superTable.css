@@ -1,6 +1,9 @@
-.selected {
+.d3-superTable-table .selected {
 	background-color: #dddddd;
 }
-.unselected {
+.d3-superTable-table .unselected {
 	background-color: white;
+}
+.d3-superTable-table .d3-superTable-header-row {
+	cursor: pointer;
 }
