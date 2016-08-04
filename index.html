@@ -94,6 +94,15 @@ d3.select("#table4_landing").call(
 		.check_ready_function(ready)
 );
 
+d3.select("#table5_landing").call(
+	d3.superTable()
+		.table_data(data)
+		.table_header(["chrom","start","end","name","size","score","type"])
+		.num_rows_to_show(10)
+		.show_advanced_filters(true)
+		.click_function(choose_row)
+);
+
 
 </script>
 
