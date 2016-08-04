@@ -5,30 +5,26 @@
 <head>
 <title>SuperTable examples</title>
 
+<link href="bootstrap.min.css" rel="stylesheet">
+
 <link href="d3-superTable.css" rel="stylesheet">
 
 <style>
-.d3-superTable-table {
-	border-spacing: 0px;
-	margin: 5vmin 5vmin 5vmin 5vmin;
-    /*border-collapse: separate;*/
+body {
+	padding: 2vmin;
 }
-
-.d3-superTable-table th, .d3-superTable-table td {
-	text-align: center;
-	padding: 0.3vmin 0.3vmin 0.3vmin 0.3vmin;
-	border: 0.1px solid #cccccc;
+.d3-superTable-table {
+	margin: 5vmin;
 }
 </style>
-
 </head>
 
 <body>
 
 	 <!-- //////////////////////////////////////////////////////////////////////////////////// -->
 
-<h1>SuperTable</h1>
-<h3>Simple table with only data. Has built-in sorting functionality with numeric sort for numeric columns and natural sort for strings</h3>
+<h1>Basic SuperTable</h1>
+<h3>Simple table with only data. Has built-in sorting functionality by clicking on column names, with numeric sort for numeric columns and natural sort for strings</h3>
 <pre>
 d3.select("#table1_landing").call(
 	d3.superTable()
@@ -42,12 +38,12 @@ d3.select("#table1_landing").call(
 <hr>  <!-- //////////////////////////////////////////////////////////////////////////////////// -->
 
 <h1>Table header</h1>
-<h3>Same table with a header provided to define which columns to show</h3>
+<h3>Same table with a header provided to define which columns to show and in what order (notice "type" is first now)</h3>
 <pre>
 d3.select("#table2_landing").call(
 	d3.superTable()
 		.table_data(data)
-		.table_header(["chrom","start","end","type", "name","score"])
+		.table_header(["type","chrom","start","end","name","score"])
 		.num_rows_to_show(5)
 );
 </pre>
@@ -147,6 +143,37 @@ d3.select("#table5_landing").call(
 
 
      <!-- //////////////////////////////////////////////////////////////////////////////////// -->
+<hr>
+
+<h3> This is the CSS included in d3-superTable.css that provides selection highlighting and other basic prettiness. Use the same tags to override various aspects of the table's style. </h3>
+<p>Note: This page also uses bootstrap to change the fonts and make the code snippets look nicer. </p>
+
+<pre>
+.d3-superTable-table {
+	border-spacing: 0px;
+	margin: 5vmin 5vmin 5vmin 5vmin;
+}
+
+.d3-superTable-table th, .d3-superTable-table td {
+	text-align: center;
+	padding: 0.3vmin 0.3vmin 0.3vmin 0.3vmin;
+	border: 0.1px solid #cccccc;
+}
+
+.d3-superTable-table input {
+	width: 100%;
+}
+
+.d3-superTable-table .selected {
+	background-color: #dddddd;
+}
+.d3-superTable-table .unselected {
+	background-color: white;
+}
+.d3-superTable-table .d3-superTable-header-row {
+	cursor: pointer;
+}
+</pre>
 
 
 </body>
@@ -181,7 +208,7 @@ d3.select("#table1_landing").call(
 d3.select("#table2_landing").call(
 	d3.superTable()
 		.table_data(data)
-		.table_header(["chrom","start","end","name","score","type"])
+		.table_header(["type","chrom","start","end","name","score"])
 		.num_rows_to_show(5)
 );
 
