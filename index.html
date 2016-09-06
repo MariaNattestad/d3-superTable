@@ -148,6 +148,34 @@ d3.select("#table5_landing").call(
      <!-- //////////////////////////////////////////////////////////////////////////////////// -->
 <hr>
 
+<h1>Run function on filterered data</h1>
+<h3>Filter table using the advanced filtering described above, and then run a given function on all the data that passed the filters</h3>
+<p>Check the console each time you change the filtering by typing into the input boxes on the table below. It will tell you the total number of rows after filtering.</p>
+
+<pre>
+function count_rows(dataset) {
+	console.log("Number of rows: ", dataset.length);
+}
+
+d3.select("#table6_landing").call(
+	d3.superTable()
+		.table_data(data)
+		.table_header(["chrom","start","end","name","size","score","type"])
+		.num_rows_to_show(10)
+		.show_advanced_filters(true) // Powerful filtering options
+		.click_function(choose_row)
+		.run_on_filtered_data_function(count_rows)
+);
+
+
+</pre>
+
+<div id="table6_landing"></div>
+
+
+     <!-- //////////////////////////////////////////////////////////////////////////////////// -->
+<hr>
+<h1> Stylesheet / CSS</h1>
 <h3> This is the CSS included in d3-superTable.css that provides selection highlighting and other basic prettiness. Use the same tags to override various aspects of the table's style. </h3>
 <p>Note: This page also uses bootstrap to change the fonts and make the code snippets look nicer. </p>
 
@@ -265,6 +293,22 @@ d3.select("#table5_landing").call(
 		.show_advanced_filters(true)
 		.click_function(choose_row)
 );
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+function count_rows(dataset) {
+	console.log("Number of rows: ", dataset.length);
+}
+
+d3.select("#table6_landing").call(
+	d3.superTable()
+		.table_data(data)
+		.table_header(["chrom","start","end","name","size","score","type"])
+		.num_rows_to_show(10)
+		.show_advanced_filters(true) // Powerful filtering options
+		.click_function(choose_row)
+		.run_on_filtered_data_function(count_rows)
+);
+
 
 
 </script>
