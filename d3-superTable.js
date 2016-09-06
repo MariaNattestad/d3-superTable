@@ -135,10 +135,9 @@ d3.superTable = function() {
 		my.create_table();
 	};
 
-	my.typing_advanced_filter = function(d) {
+	my.filter_rows = function(d,text) {
 		requirements[d] = [];
 
-		var text = d3.event.target.value;
 		var reqs = text.split(/\s+/);
 		var acceptable_types = [">","<","="];
 		for (i in reqs) {
@@ -156,7 +155,13 @@ d3.superTable = function() {
 			delete requirements[d];
 		}
 		my.create_table();
-	}
+	};
+	
+	my.typing_advanced_filter = function(d) {
+		console.log("typing advanced_filter");
+		my.filter_rows(d, d3.event.target.value);
+
+	};
 
 	my.table_data = function(value) {
 		if (!arguments.length) return table_data;
